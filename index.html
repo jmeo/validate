@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<script type="text/javascript" src="./js/jquery.js"></script>
+		<script type="text/javascript" src="./js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="./js/validate.js"></script>
+	</head>
+	<body>
+		<form id="form">
+			<a href="http://v.t.sina.com.cn/share/share.php?url=http://www.shao-ming.com&title='分享内容'" target="_blank">新浪微博</a>
+			<input type="text" id="name" maxlength="10" name="ink" data-validate="{ maxLength: 5,minLength:2,required:true,showEl:'message',pattern:/^[0-9][a-z]$/,style:'background-color:\'red\';' }">
+
+			<hr>
+			<span id="message" style=""></span>
+		</form>
+		<button id="check">click me</button>
+		<script type="text/javascript">
+			$(function(){
+				$("#check").on('click',function(){
+					var check = $("#form").validate();
+					console.info(check);
+					console.info($("#dddk"));
+				});
+			});
+
+		</script>
+	</body>
+	
+</html>
