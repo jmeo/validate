@@ -15,13 +15,6 @@
         var $sel = $("#"+showEl);
         //展示元素存在
         if($sel.length>0){
-            //var css = option.style;
-            //if(css && css.length>0){
-            //    css = "{"+css+"}"
-            //    console.info(css);
-            //    css = eval("("+css+")");
-            //    $sel.css(css);
-            //}
             $sel.html(message);
             option.el.on('focus',function(){
                 $sel.html('');
@@ -63,12 +56,9 @@
         option.el = $el;
         var temMes = null;
         var value = $el.val();
-        if(option.required){
-            if(!value){
-                temMes = "该元素为必填项！";
-                isPass = false;
-            }
-            option.minLength = option.minLength && option.minLength >0 ? option.minLength : 1;
+        if(option.required && !value){
+            temMes = "该元素为必填项！";
+            isPass = false;
         }else if(option.type && option.type=='number' && !/^\d?$/.test(value)){
             temMes = "必须为数字！";
             isPass = false;
@@ -78,7 +68,10 @@
         }else if(option.minLength && option.minLength > 0 && value.length < option.minLength){
             temMes = "最小长度为"+option.minLength;
             isPass = false;
-        }//正则
+        }else if(option.pattern && !option.pattern.test(value)){
+            temMes = "输入格式不正确";
+            isPass = false;
+        }
         if(!isPass && option.message && option.message.length>0){
             temMes = option.message;
             showMessage(temMes,option)
@@ -99,7 +92,6 @@
             var item = $(this);
             var optionStr = item.attr(checkAttr);
             var option = eval("("+optionStr+")");
-            //isPass = checkElWithOption(item,option)?false:true;
             if(!checkElWithOption(item,option)){
                 isPass = false;
             }
