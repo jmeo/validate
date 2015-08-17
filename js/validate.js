@@ -39,6 +39,7 @@
      * 校验属性参数 ： type(text/number)、required、maxLength、minLength、pattern
      * 展现信息： message、showEl(id)、showType(text,popover) -- if showType null then text and showEl must be need
      *            if showEl is not null , then text , else popover -- need boostrap popover
+     *            confirm
      * @param $el
      * @param option
      * @returns {boolean}
@@ -72,6 +73,21 @@
             temMes = "输入格式不正确";
             isPass = false;
         }
+        // confirm
+        if(isPass){
+            var confirm = option.confirm;
+            if(confirm){
+                confirm = $("#"+confirm);
+                var cValue = confirm.val();
+                if(cValue && value && cValue == value){
+                    return isPass;
+                }else{
+                    isPass = false;
+                    temMes = "请确认是否一致！";
+                }
+            }
+        }
+
         if(!isPass && option.message && option.message.length>0){
             temMes = option.message;
             showMessage(temMes,option)
