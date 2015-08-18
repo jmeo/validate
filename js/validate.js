@@ -39,7 +39,6 @@
      * 校验属性参数 ： type(text/number)、required、maxLength、minLength、pattern
      * 展现信息： message、showEl(id)、showType(text,popover) -- if showType null then text and showEl must be need
      *            if showEl is not null , then text , else popover -- need boostrap popover
-     *            confirm
      * @param $el
      * @param option
      * @returns {boolean}
@@ -60,7 +59,7 @@
         if(option.required && !value){
             temMes = "该元素为必填项！";
             isPass = false;
-        }else if(option.type && option.type=='number' && !/^\d?$/.test(value)){
+        }else if(option.type && option.type=='number' && !/^\d+$/.test(value)){
             temMes = "必须为数字！";
             isPass = false;
         }else if(option.maxLength && option.maxLength > 0 && value.length > option.maxLength){
@@ -73,6 +72,7 @@
             temMes = "输入格式不正确";
             isPass = false;
         }
+
         // confirm
         if(isPass){
             var confirm = option.confirm;
